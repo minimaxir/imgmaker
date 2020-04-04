@@ -6,7 +6,7 @@ import io
 
 class imgmaker:
     def __init__(self, chromedriver_path, scale=2):
-        assert isinstance(scale, int), "scale must be an integer"
+        assert isinstance(scale, int), "scale must be an integer."
         self.scale = scale
 
         chrome_options = Options()
@@ -23,10 +23,13 @@ class imgmaker:
             executable_path=chromedriver_path, options=chrome_options
         )
 
-    def generate(self, url, output_file="img.png"):
+    def generate(
+        self, url, width=1024, height=768, downsample=False, output_file="img.png"
+    ):
         self.driver.get(url)
+        self.driver.set_window_size(width, height)
 
-        if self.scale > 1:
+        if self.scale > 1 and downsample:
             img = Image.open(io.BytesIO(self.driver.get_screenshot_as_png()))
             img = img.resize(
                 (int(img.size[0] / self.scale), int(img.size[1] / self.scale)),
@@ -42,5 +45,5 @@ class imgmaker:
 
 if __name__ == "__main__":
     c = imgmaker("/Users/maxwoolf/Downloads/chromedriver")
-    c.generate("https://bulma.io/documentation/")
+    c.generate("https://bulma.io/documentation/", downsample=False)
     c.close()
