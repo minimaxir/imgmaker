@@ -3,30 +3,44 @@ from selenium.webdriver.chrome.options import Options
 from PIL import Image
 import io
 
-scale = 2
-output_file = "test2x.png"
 
-chrome_options = Options()
+class imgmaker:
+    def __init__(self, chromedriver_path, scale=2):
+        assert isinstance(scale, int), "scale must be an integer"
+        self.scale = scale
 
-for arg in [
-    "--headless",
-    "--hide-scrollbars",
-    "--disable-gpu",
-    f"--force-device-scale-factor={scale}",
-]:
-    chrome_options.add_argument(arg)
+        chrome_options = Options()
 
-driver = webdriver.Chrome(
-    executable_path="/Users/maxwoolf/Downloads/chromedriver", options=chrome_options
-)
-driver.get("https://www.google.com")
+        for arg in [
+            "--headless",
+            "--hide-scrollbars",
+            "--disable-gpu",
+            f"--force-device-scale-factor={scale}",
+        ]:
+            chrome_options.add_argument(arg)
+
+        self.driver = webdriver.Chrome(
+            executable_path=chromedriver_path, options=chrome_options
+        )
+
+    def generate(self, url, output_file="img.png"):
+        self.driver.get(url)
+
+        if self.scale > 1:
+            img = Image.open(io.BytesIO(self.driver.get_screenshot_as_png()))
+            img = img.resize(
+                (int(img.size[0] / self.scale), int(img.size[1] / self.scale)),
+                Image.ANTIALIAS,
+            )
+            img.save(output_file)
+        else:
+            self.driver.get_screenshot_as_file(output_file)
+
+    def close(self):
+        self.driver.close()
 
 
-if scale > 1:
-    img = Image.open(io.BytesIO(driver.get_screenshot_as_png()))
-    img = img.resize(
-        (int(img.size[0] / scale), int(img.size[1] / scale)), Image.ANTIALIAS
-    )
-    img.save(output_file)
-else:
-    driver.get_screenshot_as_file(output_file)
+if __name__ == "__main__":
+    c = imgmaker("/Users/maxwoolf/Downloads/chromedriver")
+    c.generate("https://bulma.io/documentation/")
+    c.close()
