@@ -63,6 +63,8 @@ def build_jinja_env():
 
     def strip_markdown(text):
         """Removes the <p> and </p> tags added by default."""
+        if text is None:
+            return None
         return safe_markdown(text)[3:-4]
 
     env = Environment()

@@ -13,10 +13,10 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          {{ (title or '') | markdown }}
+          {{ title | markdown or '' }}
         </h1>
         <h2 class="subtitle">
-          {{ (subtitle or '') | markdown }}
+          {{ subtitle | markdown or '' }}
         </h2>
       </div>
     </div>
