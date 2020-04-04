@@ -89,6 +89,7 @@ if __name__ == "__main__":
             "color": "success",
             "bold": True,
             "center": True,
+            "custom_css": ":root {font-size: 200%;}",
         },
         width=800,
         height=450,

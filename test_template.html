@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
 </head>
 
+<style>
+{{ custom_css or '' }}
+</style>
+
 <body>
   <section
     class="hero is-fullheight {{ 'is-' + color if color else ''}} {{ 'is-bold' if bold else '' }} {{ 'has-text-centered' if center else '' }}">
