@@ -62,5 +62,16 @@ def render_html_template(template_path, template_params):
 
 if __name__ == "__main__":
     c = imgmaker("/Users/maxwoolf/Downloads/chromedriver")
-    c.generate("test_template.html", {"text": "I am a pony!"})
+    c.generate(
+        "test_template.html",
+        {
+            "title": "I am a pony!",
+            "subtitle": "It is true!",
+            "color": "success",
+            "bold": True,
+            "center": True,
+        },
+        width=800,
+        height=450,
+    )
     c.close()
