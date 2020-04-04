@@ -1,7 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from PIL import Image
-from jinja2 import Template
+from jinja2 import Markup, Environment
+from markdown import markdown
 import io
 
 
@@ -9,6 +10,7 @@ class imgmaker:
     def __init__(self, chromedriver_path, scale=2):
         assert isinstance(scale, int), "scale must be an integer."
         self.scale = scale
+        self.env = build_jinja_env()
 
         chrome_options = Options()
 
@@ -33,7 +35,7 @@ class imgmaker:
         downsample=True,
         output_file="img.png",
     ):
-        html = render_html_template(template_path, template_params)
+        html = render_html_template(self.env, template_path, template_params)
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
 
         if height is None:
@@ -54,9 +56,24 @@ class imgmaker:
         self.driver.close()
 
 
-def render_html_template(template_path, template_params):
-    with open(template_path) as f:
-        html_template = Template(f.read())
+def build_jinja_env():
+    # https://stackoverflow.com/q/15555870
+    def safe_markdown(text):
+        return Markup(markdown(text, extensions=["smarty"]))
+
+    def strip_markdown(text):
+        """Removes the <p> and </p> tags added by default."""
+        return safe_markdown(text)[3:-4]
+
+    env = Environment()
+    env.filters["markdown"] = strip_markdown
+    env.filters["markdown_nostrip"] = safe_markdown
+    return env
+
+
+def render_html_template(env, template_path, template_params):
+    with open(template_path, "r", encoding="utf-8") as f:
+        html_template = env.from_string(f.read())
     return html_template.render(template_params)
 
 
@@ -65,8 +82,8 @@ if __name__ == "__main__":
     c.generate(
         "test_template.html",
         {
-            "title": "I am a pony!",
-            "subtitle": "It is true!",
+            "title": "I am a *big* pony!",
+            "subtitle": 'It is "true!"',
             "color": "success",
             "bold": True,
             "center": True,
