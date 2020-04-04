@@ -29,12 +29,15 @@ class imgmaker:
         template_path,
         template_params,
         width=1024,
-        height=768,
+        height=None,
         downsample=True,
         output_file="img.png",
     ):
         html = render_html_template(template_path, template_params)
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
+
+        if height is None:
+            height = self.driver.find_element_by_tag_name("html").size["height"]
         self.driver.set_window_size(width, height)
 
         if self.scale > 1 and downsample:
