@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from PIL import Image
+from jinja2 import Template
 import io
 
 
@@ -24,9 +25,16 @@ class imgmaker:
         )
 
     def generate(
-        self, url, width=1024, height=768, downsample=False, output_file="img.png"
+        self,
+        template_path,
+        template_params,
+        width=1024,
+        height=768,
+        downsample=True,
+        output_file="img.png",
     ):
-        self.driver.get(url)
+        html = render_html_template(template_path, template_params)
+        self.driver.get(f"data:text/html;charset=utf-8,{html}")
         self.driver.set_window_size(width, height)
 
         if self.scale > 1 and downsample:
@@ -43,7 +51,13 @@ class imgmaker:
         self.driver.close()
 
 
+def render_html_template(template_path, template_params):
+    with open(template_path) as f:
+        html_template = Template(f.read())
+    return html_template.render(template_params)
+
+
 if __name__ == "__main__":
     c = imgmaker("/Users/maxwoolf/Downloads/chromedriver")
-    c.generate("https://bulma.io/documentation/", downsample=False)
+    c.generate("test_template.html", {"text": "I am a pony!"})
     c.close()
