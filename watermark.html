@@ -16,7 +16,7 @@
   <style>
     body {
       height: 100vh;
-      background: url("MonaLisa.jpg") no-repeat center top fixed;
+      background: url("{{ background | img_encode }}") no-repeat center top fixed;
       background-size: cover;
       display: flex;
     }
@@ -30,7 +30,7 @@
     .level {
       width: 100%;
       color: white !important;
-      font-weight: 300;
+      font-weight: 500;
       text-shadow: 2px 2px black;
       background-color: rgba(0, 0, 0, 0.5);
     }
@@ -39,7 +39,7 @@
     i,
     svg {
       color: white !important;
-      font-weight: 700;
+      font-weight: 900;
       text-shadow: 2px 2px black;
     }
 
@@ -59,12 +59,14 @@
     svg,
     strong {
       margin-left: 0.25em;
-      margin-right: 0.5em;
+      margin-right: 0.25em;
     }
 
     .brand {
       font-size: 1.5em;
     }
+
+    {{ custom_css or '' }}
   </style>
 
   <body>
@@ -72,12 +74,12 @@
       <nav class="level">
         <div class="level-left">
           <p class="level-item">
-            Made by <strong>/u/Max</strong> on <strong>/r/lol</strong>
+            {{ left_text | markdown or '' }}
           </p>
         </div>
         <div class="level-right">
-          <i class="fas fa-globe-americas fa-2x"></i>
-          <p class="level-item brand"><strong>imgmaker</strong></p>
+          <i class="fas fa-laptop-house fa-2x"></i>
+          <p class="level-item brand"><strong>{{ brand or '' }}</strong></p>
         </div>
       </nav>
     </section>
