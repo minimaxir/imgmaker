@@ -74,8 +74,6 @@ def build_jinja_env():
         """
         Removes the <p> and </p> tags added by default.
         """
-        if text is None:
-            return None
         return safe_markdown(text)[3:-4]
 
     def img_encode(img_path):
@@ -131,15 +129,16 @@ if __name__ == "__main__":
     # )
 
     c.generate(
-        "meme.html",
+        "watermark.html",
         {
-            "top_text": "Memes are Good",
-            "bottom_text": "Yes they are!",
+            "left_text": 'Made by **Max Woolf**, a "werido"',
+            "brand": "imgmaker",
+            # "icon": "fa-laptop-house",
             "background": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
-            # "custom_css": ":root {font-size: 200%;}",
+            "custom_css": 'body {font-family: "Fira Code" !important}',
         },
-        width=512,
-        height=512,
-        output_file="meme.png",
+        width=768 + 1,
+        height=1024,
+        output_file="watermark.png",
     )
     c.close()

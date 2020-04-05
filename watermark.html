@@ -43,6 +43,11 @@
       text-shadow: 2px 2px black;
     }
 
+    em {
+      color: white !important;
+      text-shadow: 2px 2px black;
+    }
+
     .level div {
       padding: 1em;
     }
@@ -57,9 +62,10 @@
 
     i,
     svg,
-    strong {
-      margin-left: 0.25em;
-      margin-right: 0.25em;
+    strong,
+    em {
+      margin-left: 0.5em;
+      margin-right: 0.1em;
     }
 
     .brand {
@@ -71,8 +77,8 @@
 
   <body>
     <section class="top">
-      <nav class="level">
-        <div class="level-left">
+      <nav class="level is-mobile">
+        <div class="level-left is-hidden-mobile">
           <p class="level-item">
             {{ left_text | markdown or '' }}
           </p>
