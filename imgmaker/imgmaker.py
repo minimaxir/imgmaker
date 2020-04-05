@@ -4,9 +4,12 @@ from PIL import Image
 from jinja2 import Markup, Environment
 from markdown import markdown
 from base64 import b64encode
+from sys import platform
 import io
 import os
 import logging
+import requests
+import zipfile
 
 logger = logging.getLogger(__name__)
 
@@ -41,10 +44,6 @@ class imgmaker:
         output_file="img.png",
     ):
         html = render_html_template(self.env, template_path, template_params)
-
-        # with open("test.html", "w") as f:
-        #     f.write(html)
-
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
 
         if height is None:
@@ -110,6 +109,42 @@ def render_html_template(env, template_path, template_params):
     with open(template_path, "r", encoding="utf-8") as f:
         html_template = env.from_string(f.read())
     return html_template.render(template_params)
+
+
+def download_chromedriver():
+    """
+    Downloads the latest version of Chromedriver corresponding to the
+    `stable` Chrome branch.
+    """
+    latest_chrome = requests.get(
+        "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
+    ).text
+
+    # https://stackoverflow.com/a/8220141
+    platforms_binary = {
+        "linux": "linux64",
+        "linux2": "linux64",
+        "darwin": "mac64",
+        "win32": "win32",
+    }
+
+    binary = platforms_binary[platform]
+
+    print(f"Downloading Chromedriver {latest_chrome} for {binary}.")
+
+    chromedriver = requests.get(
+        f"https://chromedriver.storage.googleapis.com/{latest_chrome}/chromedriver_{binary}.zip",
+        stream=True,
+    )
+
+    with open("chromedriver.zip", "wb") as f:
+        for chunk in chromedriver.iter_content(chunk_size=128):
+            f.write(chunk)
+
+    with zipfile.ZipFile("chromedriver.zip", "r") as z:
+        z.extractall()
+
+    os.remove("chromedriver.zip")
 
 
 if __name__ == "__main__":
