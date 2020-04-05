@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=2" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=2">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-</head>
+  <style>
+    body {
+      height: 100vh;
+      font-size: 4em;
+      background: url('{{ background | img_encode }}') no-repeat center top fixed;
+      background-size: cover;
+      color: white;
+      -webkit-text-stroke: 2px black;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      line-height: 1em;
+    }
 
-<style>
-  body {
-    height: 100vh;
-    font-size: 4em;
-    background: url('{{ background | img_encode }}') no-repeat center top fixed;
-    background-size: cover;
-    color: white;
-    -webkit-text-stroke: 2px black;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    line-height: 1em;
-  }
+    section {
+      height: 50%;
+      text-transform: uppercase;
+      text-align: center;
+    }
 
-  section {
-    height: 50%;
-    text-transform: uppercase;
-    text-align: center;
-  }
+    .container {
+      padding: 0.2em;
+    }
 
-  .container {
-    padding: 0.2em;
-  }
+    .top {
+      vertical-align: top;
+    }
 
-  .top {
-    vertical-align: top;
-  }
+    .bottom {
+      display: flex;
+    }
 
-  .bottom {
-    display: flex;
-  }
+    .bottom .container {
+      margin-top: auto !important;
+      align-self: flex-end;
+    }
 
-  .bottom .container {
-    margin-top: auto !important;
-    align-self: flex-end;
-  }
+    {{ custom_css or '' }}
+  </style>
 
-  {{ custom_css or '' }}
-</style>
-
-<body>
-  <section class="top">
-    <div class="container">
-      <h1>
-        {{ top_text or '' }}
-      </h1>
-    </div>
-  </section>
-  <section class="bottom">
-    <div class="container">
-      <h1>
-        {{ bottom_text or '' }}
-      </h1>
-    </div>
-  </section>
-</body>
-
+  <body>
+    <section class="top">
+      <div class="container">
+        <h1>
+          {{ top_text or '' }}
+        </h1>
+      </div>
+    </section>
+    <section class="bottom">
+      <div class="container">
+        <h1>
+          {{ bottom_text or '' }}
+        </h1>
+      </div>
+    </section>
+  </body>
 </html>
