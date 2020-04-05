@@ -11,7 +11,7 @@
   body {
     height: 100vh;
     font-size: 4em;
-    background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg) no-repeat center top fixed;
+    background: url('{{ background | img_encode }}') no-repeat center top fixed;
     background-size: cover;
     color: white;
     -webkit-text-stroke: 2px black;
@@ -23,6 +23,10 @@
     height: 50%;
     text-transform: uppercase;
     text-align: center;
+  }
+
+  .container {
+    padding: 0.2em;
   }
 
   .top {
@@ -37,20 +41,22 @@
     margin-top: auto !important;
     align-self: flex-end;
   }
+
+  {{ custom_css or '' }}
 </style>
 
 <body>
   <section class="top">
     <div class="container">
       <h1>
-        TOP TEXT TOP TEXT TOP TEXT TOP TEXT TOP TEXT TOP TEXT TOP TEXT TOP TEXT
+        {{ top_text or '' }}
       </h1>
     </div>
   </section>
   <section class="bottom">
     <div class="container">
       <h1>
-        BOTTOM TEXT BOTTOM TEXT BOTTOM TEXT BOTTOM TEXT
+        {{ bottom_text or '' }}
       </h1>
     </div>
   </section>

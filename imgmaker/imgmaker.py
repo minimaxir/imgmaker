@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from PIL import Image
 from jinja2 import Markup, Environment
 from markdown import markdown
+from base64 import b64encode
 import io
 
 
@@ -36,6 +37,10 @@ class imgmaker:
         output_file="img.png",
     ):
         html = render_html_template(self.env, template_path, template_params)
+
+        # with open("test.html", "w") as f:
+        #     f.write(html)
+
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
 
         if height is None:
@@ -62,14 +67,32 @@ def build_jinja_env():
         return Markup(markdown(text, extensions=["smarty"]))
 
     def strip_markdown(text):
-        """Removes the <p> and </p> tags added by default."""
+        """
+        Removes the <p> and </p> tags added by default.
+        """
         if text is None:
             return None
         return safe_markdown(text)[3:-4]
 
+    def img_encode(img_path):
+        """
+        Encodes a local image as a base64 string,
+        required for local images to display in the Chromedriver.
+        """
+        with open(img_path, "rb") as f:
+            img_str = str(b64encode(f.read()))[2:-1]
+        img_type = img_path[-3:]
+        img_str = f"data:image/{img_type};base64,{img_str}"
+        return img_str
+
     env = Environment()
-    env.filters["markdown"] = strip_markdown
-    env.filters["markdown_nostrip"] = safe_markdown
+    env.filters.update(
+        {
+            "markdown": strip_markdown,
+            "markdown_nostrip": safe_markdown,
+            "img_encode": img_encode,
+        }
+    )
     return env
 
 
@@ -81,17 +104,30 @@ def render_html_template(env, template_path, template_params):
 
 if __name__ == "__main__":
     c = imgmaker("/Users/maxwoolf/Downloads/chromedriver")
+    # c.generate(
+    #     "test_template.html",
+    #     {
+    #         "title": "I am a *big* pony!",
+    #         "subtitle": 'It is "true!"',
+    #         "color": "dark",
+    #         "bold": True,
+    #         "center": True,
+    #         "custom_css": ":root {font-size: 200%;}",
+    #     },
+    #     width=800,
+    #     height=450,
+    # )
+
     c.generate(
-        "test_template.html",
+        "meme.html",
         {
-            "title": "I am a *big* pony!",
-            "subtitle": 'It is "true!"',
-            "color": "success",
-            "bold": True,
-            "center": True,
-            "custom_css": ":root {font-size: 200%;}",
+            "top_text": "Memes are Good",
+            "bottom_text": "Yes they are!",
+            "background": "ss.png",
+            # "custom_css": ":root {font-size: 200%;}",
         },
         width=800,
-        height=450,
+        height=800,
+        output_file="meme.png",
     )
     c.close()
