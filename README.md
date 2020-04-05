@@ -4,11 +4,14 @@ Create high-quality images programmatically with easily-hackable templates.
 
 imgmaker is a Python package that counterintuitively leverages headless Google Chrome for image generation, which has many benefits:
 
-- Renders images at Retina resolution (2x DPI), and downsamples them by default for improved antialiasing.
-- Templates are just HTML and CSS, allowing them to be tweaked even by non-engineers.
+- Renders images at Retina resolution (2x DPI) for improved image/text quality, and downsamples them by default for further improved antialiasing.
+- Templates are just HTML and CSS, allowing them to be tweaked even by designers.
 - Since the CSS is responsive, you get conditional image adjustments based on the image width without additional code flows.
+- Optional dynamic image height to fit whatever text is provided.
 - Leverages jinja2 for Python templating, Bulma for high-quality CSS-only layouts, and Font Awesome for icon fonts.
 - Markdown support for templates for improved styling.
+
+The generated images can be used for many things, including social sharing thumbnails, Twitter bots, and APIs.
 
 ## Installation
 
@@ -32,11 +35,13 @@ imgmaker contains built-in templates (you can view all the templates in the corr
 
 ## Helpful Notes
 
-- Yes, using Google Chrome automation is a galaxy-brain approach toward programmatic image generation. However, the feature robustness of Chrome and hackability it allows far outweights the "weight" of Chrome, and it would take substantially more code to natively replicate.
+- Yes, using Google Chrome automation is a galaxy-brain approach toward programmatic image generation. However, the feature robustness of Chrome and hackability it allows far outweights the "weight" of Chrome, and it would take substantially more code to natively replicate, especially cross-platform.
 
 ## To-Do
 
 - Add a Docker container + an app to deploy (e.g. to Cloud Run)
+- Optimize included HTML + CSS templates
+- Add more templates! (as needs/community demand arise)
 
 ## Maintainer/Creator
 
