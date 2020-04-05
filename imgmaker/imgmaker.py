@@ -5,6 +5,10 @@ from jinja2 import Markup, Environment
 from markdown import markdown
 from base64 import b64encode
 import io
+import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class imgmaker:
@@ -76,13 +80,21 @@ def build_jinja_env():
 
     def img_encode(img_path):
         """
-        Encodes a local image as a base64 string,
+        Checks if a provided image is a local image or a remote image.
+        If local, encodes the image as a base64 string,
         required for local images to display in the Chromedriver.
         """
-        with open(img_path, "rb") as f:
-            img_str = str(b64encode(f.read()))[2:-1]
-        img_type = img_path[-3:]
-        img_str = f"data:image/{img_type};base64,{img_str}"
+        if os.path.isfile(img_path):
+            # Local image
+            with open(img_path, "rb") as f:
+                img_str = str(b64encode(f.read()))[2:-1]
+            img_type = img_path[-3:]
+            img_str = f"data:image/{img_type};base64,{img_str}"
+        else:
+            # Remote image
+            logger.info("Downloading {img_path}")
+            img_str = img_path
+
         return img_str
 
     env = Environment()
@@ -123,11 +135,11 @@ if __name__ == "__main__":
         {
             "top_text": "Memes are Good",
             "bottom_text": "Yes they are!",
-            "background": "ss.png",
+            "background": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
             # "custom_css": ":root {font-size: 200%;}",
         },
-        width=800,
-        height=800,
+        width=512,
+        height=512,
         output_file="meme.png",
     )
     c.close()
