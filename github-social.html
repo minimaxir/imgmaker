@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=2" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.13.0/js/all.js"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <style>
+    body {
+      height: 100vh;
+      background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg") no-repeat center top fixed;
+      background-size: cover;
+      display: flex;
+      font-family: 'Fira Code', monospace;
+      font-variant-ligatures: normal;
+    }
+
+    section {
+      /* margin-top: auto !important; */
+      align-self: flex-end;
+      width: 100%;
+    }
+
+    .bottom {
+      width: 100%;
+      color: white !important;
+      font-weight: 500;
+      text-shadow: 1px 1px black;
+      background: rgb(2,0,36);
+      background: linear-gradient(90deg, rgba(2,0,36,0.5) 0%, rgba(9,9,121,0.5) 35%, rgba(0,212,255,0.5) 100%);
+    }
+
+    strong,
+    i,
+    svg {
+      color: white !important;
+      font-weight: 700;
+      text-shadow: 1px 1px black;
+    }
+
+    em {
+      color: white !important;
+      text-shadow: 1px 1px black;
+    }
+
+    .level div {
+      padding: 1em;
+    }
+
+    .level-left {
+      padding-left: 2em !important;
+    }
+
+    .level-right {
+      padding-right: 2em !important;
+    }
+
+    #left .level, .columns:last-child, .column {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    #right .level {
+      height:100%;
+    }
+
+    i,
+    svg,
+    strong,
+    em {
+      margin-left: 0em;
+      margin-right: 1em;
+    }
+
+    .brand {
+      font-size: 1.5em;
+    }
+
+    #profile {
+      border: white solid 0.1em;
+    }
+
+    {{ custom_css or '' }}
+  </style>
+
+  <body>
+    <section class="bottom">
+      <div class="columns">
+        <div id="left" class="column">
+          <nav class="level">
+            <div class="level-left">
+              <p class="level-item">
+                <i class="fab fa-python"></i>
+                Python
+              </p>
+            </div>
+          </nav>
+          <nav class="level">
+            <div class="level-left">
+              <p class="level-item">
+                <i class="fas fa-tag"></i>
+                image gen, automation
+              </p>
+            </div>
+          </nav>
+        </div>
+        <div id="right" class="column">
+          <nav class="level">
+            <div class="level-left"></div>
+            <div class="level-right">
+              <p class="level-item">
+                Made by @minimaxir
+              </p>
+              <p class="level-item">
+                <figure class="image is-64x64">
+                  <img
+                    id="profile"
+                    class="is-rounded"
+                    src="https://avatars2.githubusercontent.com/u/2179708?s=460&u=fa33a847bd260bee190d2994538a1ca32d467445&v=4"
+                  />
+                </figure>
+              </p>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
