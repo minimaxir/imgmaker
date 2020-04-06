@@ -123,7 +123,6 @@ def download_chromedriver():
     # https://stackoverflow.com/a/8220141
     platforms_binary = {
         "linux": "linux64",
-        "linux2": "linux64",
         "darwin": "mac64",
         "win32": "win32",
     }
