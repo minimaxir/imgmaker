@@ -10,12 +10,13 @@ import os
 import logging
 import requests
 import zipfile
+import fire
 
 logger = logging.getLogger(__name__)
 
 
 class imgmaker:
-    def __init__(self, chromedriver_path, scale=2):
+    def __init__(self, chromedriver_path="chromedriver", scale=2):
         assert isinstance(scale, int), "scale must be an integer."
         self.scale = scale
         self.env = build_jinja_env()
@@ -116,6 +117,11 @@ def download_chromedriver():
     Downloads the latest version of Chromedriver corresponding to the
     `stable` Chrome branch.
     """
+
+    if os.path.isfile("chromedriver"):
+        print("chromedriver binary is already present in the current directory.")
+        return
+
     latest_chrome = requests.get(
         "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
     ).text
@@ -129,7 +135,7 @@ def download_chromedriver():
 
     binary = platforms_binary[platform]
 
-    print(f"Downloading Chromedriver {latest_chrome} for {binary}.")
+    print(f"Downloading ChromeDriver {latest_chrome} for {binary}.")
 
     chromedriver = requests.get(
         f"https://chromedriver.storage.googleapis.com/{latest_chrome}/chromedriver_{binary}.zip",
@@ -146,33 +152,37 @@ def download_chromedriver():
     os.remove("chromedriver.zip")
 
 
-if __name__ == "__main__":
-    c = imgmaker("/Users/maxwoolf/Downloads/chromedriver")
-    # c.generate(
-    #     "test_template.html",
-    #     {
-    #         "title": "I am a *big* pony!",
-    #         "subtitle": 'It is "true!"',
-    #         "color": "dark",
-    #         "bold": True,
-    #         "center": True,
-    #         "custom_css": ":root {font-size: 200%;}",
-    #     },
-    #     width=800,
-    #     height=450,
-    # )
+def imgmaker_cli(
+    action="chromedriver",
+    template_path=None,
+    template_params=None,
+    chromedriver_path="chromedriver",
+    scale=2,
+    width=1024,
+    height=None,
+    downsample=True,
+    output_file="img.png",
+):
+    """Create high-quality images programmatically using easily-hackable templates.
 
-    c.generate(
-        "watermark.html",
-        {
-            "left_text": 'Made by **Max Woolf**, a "werido"',
-            "brand": "imgmaker",
-            # "icon": "fa-laptop-house",
-            "background": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
-            "custom_css": 'body {font-family: "Fira Code" !important}',
-        },
-        width=768 + 1,
-        height=1024,
-        output_file="watermark.png",
-    )
-    c.close()
+    action: Action to perform. Select `chromedriver` to download Chromedriver,
+    `generate` to generate an image.
+    """
+
+    assert action in [
+        "chromedriver",
+        "generate",
+    ], "action must be chromedriver or generate."
+
+    if action == "chromedriver":
+        download_chromedriver()
+    elif action == "generate":
+        i = imgmaker(chromedriver_path, scale)
+        i.generate(
+            template_path, template_params, width, height, downsample, output_file
+        )
+        i.close()
+
+
+def imgmaker_cli_handler(**kwargs):
+    fire.Fire(imgmaker_cli)

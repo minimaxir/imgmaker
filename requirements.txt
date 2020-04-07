@@ -1,0 +1,6 @@
+selenium
+jinja2
+Pillow
+requests
+fire
+markdown

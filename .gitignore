@@ -1,1 +1,4 @@
 chromedriver
+build/
+dist/
+*.egg-info

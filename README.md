@@ -1,6 +1,6 @@
 # imgmaker
 
-Create high-quality images programmatically with easily-hackable templates.
+Create high-quality images programmatically using easily-hackable templates.
 
 imgmaker is a Python package that counterintuitively leverages headless Google Chrome for image generation, which has many benefits:
 
@@ -21,7 +21,11 @@ imgmaker can be installed via pip. (Python 3.6+)
 pip3 install imgmaker
 ```
 
-You will also need to download a Chromedriver with the _same_ version as your installed Google Chrome. imgmaker has a CLI tool that will automacally download the appropriate version to the current directory.
+You will also need to download a [ChromeDriver]([chromedriver](https://chromedriver.chromium.org)) with the _same_ version as your installed Google Chrome. imgmaker has a CLI tool that will automatically download the ChromeDriver for your platform corresponding to the latest `stable` version to the current directory:
+
+```sh
+imgmaker chromedriver
+```
 
 ## Usage
 
@@ -38,6 +42,8 @@ imgmaker contains built-in templates (you can view all the templates in the corr
 - Yes, using Google Chrome automation is a galaxy-brain approach toward programmatic image generation. However, the feature robustness of Chrome and hackability it allows far outweights the "weight" of Chrome, and it would take substantially more code to natively replicate, especially cross-platform.
 
 ## To-Do
+
+I made imgmaker more as a proof-of-concept, as I have a few projects where this package could be very useful. If there is user-interest, I have more features planned:
 
 - Add a Docker container + an app to deploy (e.g. to Cloud Run)
 - Optimize included HTML + CSS templates
