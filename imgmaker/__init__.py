@@ -1,1 +1,1 @@
-from imgmaker import imgmaker
+from .imgmaker import imgmaker

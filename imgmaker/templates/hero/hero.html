@@ -15,15 +15,15 @@
 
   <body>
     <section
-      class="hero is-fullheight {{ 'is-' + color if color else ''}} {{ 'is-bold' if bold else '' }} {{ 'has-text-centered' if center else '' }}"
+      class="hero is-fullheight {{ 'is-' + color }} {{ 'is-bold' if bold }} {{ 'has-text-centered' if center }}"
     >
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            {{ title | markdown or '' }}
+            {{ title | markdown }}
           </h1>
           <h2 class="subtitle">
-            {{ subtitle | markdown or '' }}
+            {{ subtitle | markdown }}
           </h2>
         </div>
       </div>

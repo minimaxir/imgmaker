@@ -21,7 +21,7 @@ imgmaker can be installed via pip. (Python 3.6+)
 pip3 install imgmaker
 ```
 
-You will also need to download a [ChromeDriver]([chromedriver](https://chromedriver.chromium.org)) with the _same_ version as your installed Google Chrome. imgmaker has a CLI tool that will automatically download the ChromeDriver for your platform corresponding to the latest `stable` version to the current directory:
+You will also need to download a [ChromeDriver](<[chromedriver](https://chromedriver.chromium.org)>) with the _same_ version as your installed Google Chrome. imgmaker has a CLI tool that will automatically download the ChromeDriver for your platform corresponding to the latest `stable` version to the current directory:
 
 ```sh
 imgmaker chromedriver
@@ -32,10 +32,42 @@ imgmaker chromedriver
 First, you can instantiate an `imgmaker` object for generation, which starts up a headless Google Chrome in the background.
 
 ```python
+from imgmaker import imgmaker
+
 i = imgmaker()
 ```
 
-imgmaker contains built-in templates (you can view all the templates in the corresponding folder, with READMEs for each one)
+imgmaker contains built-in templates (you can view all the templates in the corresponding folder, with READMEs for each one). We'll use the [Hero](imgmaker/templates/hero) template; the default used if no template is specified.
+
+```python
+i.generate()
+```
+
+We can pass a dict containing template parameters. For the Hero template, we can specify the title and subtitle.
+
+```python
+i.generate(
+    "hero",
+    {"title": "imgmaker",
+     "subtitle": "Create high-quality images programmatically"},
+)
+```
+
+You can also alter the background `color` matching the Bulma documentation, use the `bold` background variant instead, and/or _use custom CSS and go crazy_.
+
+```python
+i.generate(
+    "hero",
+    {"title": "imgmaker",
+     "subtitle": "Create high-quality images programmatically",
+     "color": "dark",
+     "bold": True,
+     "custom_css": ".container {font-family: Courier; transform: skewX(10deg);}"
+    }
+)
+```
+
+You can view all the included templates in the docs. You can provide your own Jinja templates as well.
 
 ## Helpful Notes
 

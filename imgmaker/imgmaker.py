@@ -11,12 +11,12 @@ import logging
 import requests
 import zipfile
 import fire
-
-logger = logging.getLogger(__name__)
+from pkg_resources import resource_filename
+import yaml
 
 
 class imgmaker:
-    def __init__(self, chromedriver_path="chromedriver", scale=2):
+    def __init__(self, chromedriver_path="./chromedriver", scale=2):
         assert isinstance(scale, int), "scale must be an integer."
         self.scale = scale
         self.env = build_jinja_env()
@@ -37,14 +37,36 @@ class imgmaker:
 
     def generate(
         self,
-        template_path,
-        template_params,
-        width=1024,
+        template_path="hero",
+        template_params={},
+        width=None,
         height=None,
         downsample=True,
         output_file="img.png",
     ):
-        html = render_html_template(self.env, template_path, template_params)
+
+        if os.path.isfile(template_path):
+            # if loading a template outside the package
+            html = render_html_template(self.env, template_path, template_params)
+        else:
+            # if using an included template
+            template_folder = resource_filename(__name__, "templates")
+            template_subfolder = os.path.join(template_folder, template_path)
+            assert os.path.isdir(
+                template_subfolder
+            ), f"{template_path} is not an included template with imgmaker."
+
+            config_path = os.path.join(template_subfolder, "config.yaml")
+            with open(config_path, "r", encoding="utf-8") as f:
+                config = yaml.safe_load(f)
+
+            full_path = os.path.join(template_subfolder, config["template"])
+            params = config["default_params"]
+            params.update(template_params)
+            height = height or config["height"]
+            width = width or config["width"]
+            html = render_html_template(self.env, full_path, params)
+
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
 
         if height is None:
@@ -90,7 +112,7 @@ def build_jinja_env():
             img_str = f"data:image/{img_type};base64,{img_str}"
         else:
             # Remote image
-            logger.info("Downloading {img_path}")
+            logging.info("Downloading {img_path}")
             img_str = img_path
 
         return img_str
@@ -146,19 +168,26 @@ def download_chromedriver():
         for chunk in chromedriver.iter_content(chunk_size=128):
             f.write(chunk)
 
-    with zipfile.ZipFile("chromedriver.zip", "r") as z:
-        z.extractall()
+    # https://stackoverflow.com/a/46837272
+    with zipfile.ZipFile("chromedriver.zip", "r") as zf:
+        for info in zf.infolist():
+            extracted_path = zf.extract(info, "")
+
+            if info.create_system == 3:
+                unix_attributes = info.external_attr >> 16
+                if unix_attributes:
+                    os.chmod(extracted_path, unix_attributes)
 
     os.remove("chromedriver.zip")
 
 
 def imgmaker_cli(
     action="chromedriver",
-    template_path=None,
-    template_params=None,
-    chromedriver_path="chromedriver",
+    template_path="hero",
+    template_params={},
+    chromedriver_path="./chromedriver",
     scale=2,
-    width=1024,
+    width=None,
     height=None,
     downsample=True,
     output_file="img.png",

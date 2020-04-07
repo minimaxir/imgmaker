@@ -1,0 +1,2 @@
+graft */templates
+global-exclude .DS_Store
