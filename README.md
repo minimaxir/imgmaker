@@ -2,20 +2,19 @@
 
 Create high-quality images programmatically using easily-hackable templates.
 
-imgmaker is a Python package that counterintuitively leverages headless Google Chrome for image generation, which has many benefits:
+imgmaker is a Python package that leverages headless [Google Chrome](https://www.google.com/chrome/) via [selenium](https://selenium-python.readthedocs.io) for image generation, which counterintuitively has many benefits:
 
 - Renders images at Retina resolution (2x DPI) for improved image/text quality, and downsamples them by default for further improved antialiasing.
 - Templates are just HTML and CSS, allowing them to be tweaked even by designers.
 - Since the CSS is responsive, you get conditional image adjustments based on the image width without additional code flows.
 - Optional dynamic image height to fit whatever text is provided.
-- Leverages jinja2 for Python templating, Bulma for high-quality CSS-only layouts, and Font Awesome for icon fonts.
-- Markdown support for templates for improved styling.
+- Leverages [jinja2](https://jinja.palletsprojects.com/en/2.11.x/) for Python templating, [Bulma](https://bulma.io) for high-quality CSS-only layouts, and [Font Awesome](https://fontawesome.com) for icon fonts.
 
 The generated images can be used for many things, including social sharing thumbnails, Twitter bots, and APIs.
 
 ## Installation
 
-imgmaker can be installed via pip. (Python 3.6+)
+imgmaker can be installed from PyPI via pip. (Python 3.6+)
 
 ```sh
 pip3 install imgmaker
@@ -43,6 +42,8 @@ imgmaker contains built-in templates (you can view all the templates in the corr
 i.generate()
 ```
 
+![](docs/img/readme0.png)
+
 We can pass a dict containing template parameters. For the Hero template, we can specify the title and subtitle.
 
 ```python
@@ -53,6 +54,8 @@ i.generate(
     },
 )
 ```
+
+![](docs/img/readme1.png)
 
 You can also alter the background `color` matching the Bulma documentation, use the `bold` background variant instead, set the image to a dynamic height to fit all the text, and/or _use custom CSS and go crazy_.
 
@@ -71,7 +74,9 @@ i.generate(
 )
 ```
 
-You can view all the included templates in the docs. You can provide your own Jinja templates as well.
+![](docs/img/readme2.png)
+
+You can view all the templates included with imgmaker in the docs. You can also provide your own Jinja templates to `generate()`.
 
 ## Helpful Notes
 
