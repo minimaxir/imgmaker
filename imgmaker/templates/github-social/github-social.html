@@ -20,7 +20,7 @@
   <style>
     body {
       height: 100vh;
-      background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg") no-repeat center top fixed;
+      background: url("{{ background | img_encode }}") no-repeat center top fixed;
       background-size: cover;
       display: flex;
       font-family: 'Fira Code', monospace;
@@ -103,8 +103,8 @@
           <nav class="level">
             <div class="level-left">
               <p class="level-item">
-                <i class="fab fa-python"></i>
-                Python
+                <i class="{{ lang_icon }}"></i>
+                {{ lang }}
               </p>
             </div>
           </nav>
@@ -112,7 +112,7 @@
             <div class="level-left">
               <p class="level-item">
                 <i class="fas fa-tag"></i>
-                image gen, automation
+                {{ tags }}
               </p>
             </div>
           </nav>
@@ -122,15 +122,11 @@
             <div class="level-left"></div>
             <div class="level-right">
               <p class="level-item">
-                Made by @minimaxir
+                {{ madeby }}
               </p>
               <p class="level-item">
                 <figure class="image is-64x64">
-                  <img
-                    id="profile"
-                    class="is-rounded"
-                    src="https://avatars2.githubusercontent.com/u/2179708?s=460&u=fa33a847bd260bee190d2994538a1ca32d467445&v=4"
-                  />
+                  <img id="profile" class="is-rounded" src="{{ avatar }}" />
                 </figure>
               </p>
             </div>

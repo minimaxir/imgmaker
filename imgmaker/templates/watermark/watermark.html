@@ -80,12 +80,12 @@
       <nav class="level is-mobile">
         <div class="level-left is-hidden-mobile">
           <p class="level-item">
-            {{ left_text | markdown or '' }}
+            {{ left_text | markdown }}
           </p>
         </div>
         <div class="level-right">
-          <i class="{{ fa_icon or 'fas fa-laptop-house'}} fa-2x"></i>
-          <p class="level-item brand"><strong>{{ brand or '' }}</strong></p>
+          <i class="{{ fa_icon }} fa-2x"></i>
+          <p class="level-item brand"><strong>{{ brand }}</strong></p>
         </div>
       </nav>
     </section>

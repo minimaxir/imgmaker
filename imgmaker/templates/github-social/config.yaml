@@ -1,0 +1,10 @@
+name: GitHub Social
+template: github-social.html
+width: 1280
+height: 640
+default_params:
+  lang_icon: 'fab fa-python'
+  lang: Python
+  tags: Cool Stuff
+  madeby: Made by me!
+  avatar: https://bulma.io/images/placeholders/128x128.png

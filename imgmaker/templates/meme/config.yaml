@@ -1,0 +1,7 @@
+name: Meme
+template: meme.html
+width: 512
+height: 512
+default_params:
+  top_text: "Top Text"
+  bottom_text: "Bottom Text"

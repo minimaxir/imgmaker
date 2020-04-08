@@ -1,0 +1,8 @@
+name: GitHub Social
+template: github-social.html
+width: 1024
+height: -1
+default_params:
+  left_text: Made by **me**!
+  fa_icon: fas fa-laptop-house
+  brand_text: My brand!
