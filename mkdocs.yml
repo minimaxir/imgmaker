@@ -8,6 +8,10 @@ nav:
   - Helpful Notes: helpful-notes.md
   - Templates:
       - Hero: hero.md
+      - Meme: meme.md
+      - Watermarked Image: watermark.md
+      - GitHub Social Card: github-social.md
+  - Create Your Own Template: template.md
 
 theme:
   name: "material"

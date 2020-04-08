@@ -1,5 +1,7 @@
 # imgmaker
 
+![](docs/img/meme3.png)
+
 Create high-quality images programmatically using easily-hackable templates.
 
 imgmaker is a Python package that leverages headless [Google Chrome](https://www.google.com/chrome/) via [selenium](https://selenium-python.readthedocs.io) for image generation, which counterintuitively has many benefits:
@@ -8,7 +10,7 @@ imgmaker is a Python package that leverages headless [Google Chrome](https://www
 - Templates are just HTML and CSS, allowing them to be tweaked even by designers.
 - Since the CSS is responsive, you get conditional image adjustments based on the image width without additional code flows.
 - Optional dynamic image height to fit whatever text is provided.
-- Leverages [jinja2](https://jinja.palletsprojects.com/en/2.11.x/) for Python templating, [Bulma](https://bulma.io) for high-quality CSS-only layouts, and [Font Awesome](https://fontawesome.com) for icon fonts.
+- Leverages [jinja2](https://palletsprojects.com/p/jinja/) for Python templating, [Bulma](https://bulma.io) for high-quality CSS-only layouts, and [Font Awesome](https://fontawesome.com) for icon fonts.
 
 The generated images can be used for many things, including social sharing thumbnails, Twitter bots, and APIs.
 
@@ -20,7 +22,7 @@ imgmaker can be installed from PyPI via pip. (Python 3.6+)
 pip3 install imgmaker
 ```
 
-You will also need to download a [ChromeDriver](<[chromedriver](https://chromedriver.chromium.org)>) with the _same_ version as your installed Google Chrome. imgmaker has a CLI tool that will automatically download the ChromeDriver for your platform corresponding to the latest `stable` version to the current directory:
+You will also need to download a [ChromeDriver](https://chromedriver.chromium.org) with the _same_ version as your installed Google Chrome. imgmaker has a CLI tool that will automatically download the ChromeDriver for your platform corresponding to the latest `stable` version to the current directory:
 
 ```sh
 imgmaker chromedriver
@@ -57,7 +59,7 @@ i.generate(
 
 ![](docs/img/readme1.png)
 
-You can also alter the background `color` matching the Bulma documentation, use the `bold` background variant instead, set the image to a dynamic height to fit all the text, and/or _use custom CSS and go crazy_.
+You can also alter the background `color` [matching the Bulma documentation](https://bulma.io/documentation/layout/hero/) (e.g. `info`, `success`), use the `bold` background variant instead, set the image to a dynamic height to fit all the text, and/or _use custom CSS and go crazy_.
 
 ```python
 i.generate(
@@ -70,7 +72,7 @@ i.generate(
      "bold": True,
      "custom_css": ".container {font-family: Comic Sans MS; transform: rotate(-20deg);}"
     },
-    height = -1
+    height = -1,
 )
 ```
 
@@ -81,6 +83,7 @@ You can view all the templates included with imgmaker in the docs. You can also 
 ## Helpful Notes
 
 - Yes, using Google Chrome automation is a galaxy-brain approach toward programmatic image generation. However, the feature robustness of Chrome and hackability it allows far outweights the "weight" of Chrome, and it would take substantially more code to natively replicate, especially cross-platform.
+- If you want to intentionally create Retina (2x DPI) or higher assets, you can disable downsampling by passing `downsampling=False` to `generate()`. Additionally, you can pass a `scale` value to the `imgmaker()` constructor (e.g. `imgmaker(scale=6)`) for _very_ high-resolution pictures!
 
 ## To-Do
 

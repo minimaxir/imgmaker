@@ -6,5 +6,5 @@ default_params:
   color: primary
   bold: False
   center: True
-  title: "The title!"
-  subtitle: "The subtitle!"
+  title: The title!
+  subtitle: The subtitle!

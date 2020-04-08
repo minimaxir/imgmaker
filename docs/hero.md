@@ -2,11 +2,21 @@ A very simple example of imgmaker leveraging Bulma's [hero unit styles](https://
 
 The Hero template is the default template used if none is specified.
 
-## Default Parameters
+## Template Dimensions
 
-- Width: 320
-- Height: 240
+320px x 240px
+
+## Template Parameters
+
+| Name         | Description                                                         | Default           |
+| ------------ | ------------------------------------------------------------------- | ----------------- |
+| `color`      | The color of the Hero unit, following the Bulma documentation.      | `primary`         |
+| `bold`       | Boolean whether to use the bold style as noted in the documentation | `False`           |
+| `center`     | Whether to center the text                                          | `True`            |
+| `title`      | The title text.                                                     | `"The title!"`    |
+| `subtitle`   | The subtitle text.                                                  | `"The subtitle!"` |
+| `custom_css` | Custom CSS; refer to the raw template for HTML elements.            | ''                |
 
 ## Example Usage
 
-See the [tutorial](tutorial.md).
+See the [tutorial](tutorial.md) in the documentation.
