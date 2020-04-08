@@ -49,21 +49,25 @@ We can pass a dict containing template parameters. For the Hero template, we can
 i.generate(
     "hero",
     {"title": "imgmaker",
-     "subtitle": "Create high-quality images programmatically"},
+     "subtitle": "Create high-quality images programmatically"
+    },
 )
 ```
 
-You can also alter the background `color` matching the Bulma documentation, use the `bold` background variant instead, and/or _use custom CSS and go crazy_.
+You can also alter the background `color` matching the Bulma documentation, use the `bold` background variant instead, set the image to a dynamic height to fit all the text, and/or _use custom CSS and go crazy_.
 
 ```python
 i.generate(
     "hero",
     {"title": "imgmaker",
-     "subtitle": "Create high-quality images programmatically",
+     "subtitle": "Create high-quality images programmatically.<br /><br />" +
+                 "The generated images can be used for many things, " +
+                 "including social sharing thumbnails, Twitter bots, and APIs.",
      "color": "dark",
      "bold": True,
-     "custom_css": ".container {font-family: Courier; transform: skewX(10deg);}"
-    }
+     "custom_css": ".container {font-family: Comic Sans MS; transform: rotate(-20deg);}"
+    },
+    height = -1
 )
 ```
 
@@ -79,6 +83,7 @@ I made imgmaker more as a proof-of-concept, as I have a few projects where this 
 
 - Add a Docker container + an app to deploy (e.g. to Cloud Run)
 - Optimize included HTML + CSS templates
+  - Use local CSS/font files for included templates
 - Add more templates! (as needs/community demand arise)
 
 ## Maintainer/Creator

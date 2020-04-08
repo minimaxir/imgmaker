@@ -48,6 +48,7 @@ class imgmaker:
         if os.path.isfile(template_path):
             # if loading a template outside the package
             html = render_html_template(self.env, template_path, template_params)
+            width = width or 512
         else:
             # if using an included template
             template_folder = resource_filename(__name__, "templates")
@@ -69,7 +70,8 @@ class imgmaker:
 
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
 
-        if height is None:
+        if height is None or height == -1:
+            self.driver.set_window_size(width, 1)
             height = self.driver.find_element_by_tag_name("html").size["height"]
         self.driver.set_window_size(width, height)
 
