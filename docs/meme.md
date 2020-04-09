@@ -15,7 +15,7 @@ A template invoking image macros, complete with Impact font.
 
 ## Example Usage
 
-(note: due to file-size (about 500KB per image), the images included on this page have been compressed using TinyPNG)
+(note: due to file-size [about 500KB per image], the images included on this page have been compressed using [TinyPNG](https://tinypng.com))
 
 Set up imgmaker:
 

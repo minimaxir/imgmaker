@@ -43,6 +43,7 @@ class imgmaker:
         height=None,
         downsample=True,
         output_file="img.png",
+        save_html=False,
     ):
 
         if os.path.isfile(template_path):
@@ -67,6 +68,10 @@ class imgmaker:
             height = height or config["height"]
             width = width or config["width"]
             html = render_html_template(self.env, full_path, params)
+
+        if save_html:
+            with open("rendered_html.html", "w", encoding="utf-8") as f:
+                f.write(html)
 
         self.driver.get(f"data:text/html;charset=utf-8,{html}")
 
@@ -106,6 +111,10 @@ def build_jinja_env():
         If local, encodes the image as a base64 string,
         required for local images to display in the Chromedriver.
         """
+        # If the img_path is not provided as a parameter.
+        if not img_path:
+            return ""
+
         if os.path.isfile(img_path):
             # Local image
             with open(img_path, "rb") as f:

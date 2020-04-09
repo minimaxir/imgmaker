@@ -3,3 +3,6 @@ build/
 dist/
 *.egg-info
 __pycache__
+img.png
+demo.html
+rendered_html.html
