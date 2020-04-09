@@ -120,12 +120,12 @@ Additionally, we'll add basic Custom CSS support within `<style>` tags.
     <section class="section">
       <div class="container">
         <div class="columns is-mobile">
-          <div id="left-column" class="column is-half">
+          <div class="left column is-half">
             <figure class="image container is-128x128">
               <img class="is-rounded" src="{{ image | img_encode }}" />
             </figure>
           </div>
-          <div id="right-column" class="column is-half">
+          <div class="right column is-half">
             <h1 class="title">
               {{ title | markdown }}
             </h1>
@@ -155,16 +155,18 @@ i.generate("demo.html",
 
 ![](img/template3.png)
 
-Now let's add some custom CSS. In this code, both columns are given different element `id`s, which lets us style them independently.
+Now let's add some custom CSS. In this code, both columns are given different classes, which lets us style them independently.
 
 ```python
 i.generate("demo.html",
            {"title": "imgmaker is _awesome_!",
            "subtitle": "\"The best Python app ever.\"",
            "image": "https://avatars2.githubusercontent.com/u/2179708",
-           "custom_css": "#left-column {filter: sepia(100%);} #right-column {transform: rotate(20deg);}"
+           "custom_css": ".left {filter: sepia(100%);} .right {transform: rotate(20deg);}"
            }
 )
 ```
+
+![](img/template4.png)
 
 Have fun!

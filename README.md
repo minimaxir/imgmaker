@@ -84,6 +84,7 @@ You can view all the templates included with imgmaker in the docs. You can also 
 
 - Yes, using Google Chrome automation is a galaxy-brain approach toward programmatic image generation. However, the feature robustness of Chrome and hackability it allows far outweights the "weight" of Chrome, and it would take substantially more code to natively replicate, especially cross-platform.
 - If you want to intentionally create Retina (2x DPI) or higher assets, you can disable downsampling by passing `downsampling=False` to `generate()`. Additionally, you can pass a `scale` value to the `imgmaker()` constructor (e.g. `imgmaker(scale=6)`) for _very_ high-resolution pictures!
+- Do not use `custom_css` with id-level rules; this causes the ChromeDriver to hang for whatever reason.
 
 ## To-Do
 
