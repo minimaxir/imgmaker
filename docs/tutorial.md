@@ -1,4 +1,4 @@
-First, you can instantiate an `imgmaker` object for generation, which starts up a headless Google Chrome in the background.
+First, you can instantiate an `imgmaker` object, which starts up a headless Google Chrome in the background.
 
 ```python
 from imgmaker import imgmaker
@@ -6,7 +6,7 @@ from imgmaker import imgmaker
 i = imgmaker()
 ```
 
-imgmaker contains built-in templates (you can view all the templates in the corresponding folder, with READMEs for each one). We'll use the [Hero](imgmaker/templates/hero) template; the default used if no template is specified.
+imgmaker contains built-in templates (you can view all the templates in the documentation, with specs/usage tutorials for each one). We'll use the [Hero](https://imgmaker.minimaxir.com/hero/) template; the default used if no template is specified.
 
 ```python
 i.generate()
@@ -14,7 +14,7 @@ i.generate()
 
 ![](img/readme0.png)
 
-We can pass a dict containing template parameters. For the Hero template, we can specify the title and subtitle.
+We can pass a dictionary containing template parameters to `generate()`. For the Hero template, we can specify the title and subtitle.
 
 ```python
 i.generate(
