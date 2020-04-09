@@ -12,7 +12,7 @@ imgmaker is a Python package that leverages headless [Google Chrome](https://www
 - Optional dynamic image height to fit whatever text is provided.
 - Leverages [jinja2](https://palletsprojects.com/p/jinja/) for Python templating, [Bulma](https://bulma.io) for high-quality CSS-only layouts, and [Font Awesome](https://fontawesome.com) for icon fonts.
 
-imgmaker contains installed templates, allowing you to create memes and watermarks out of the box. The generated images can be used for many things, including social sharing thumbnails, Twitter bots, and APIs.
+imgmaker contains installed templates, allowing you to create [memes](https://imgmaker.minimaxir.com/meme/) and [watermarks](https://imgmaker.minimaxir.com/watermark/) out of the box. The generated images can be used for many things, including social sharing thumbnails, Twitter bots, and APIs. Please read [the documentation](https://imgmaker.minimaxir.com) for more info!
 
 ## Installation
 
@@ -78,15 +78,15 @@ i.generate(
 
 ![](docs/img/readme2.png)
 
-You can also provide your own Jinja templates to `generate()`; see this doc for a tutorial.
+You can also provide your own Jinja templates to `generate()`; see [this doc](https://imgmaker.minimaxir.com/template/) for a tutorial.
 
-When you are done, it's recommended to close the Google Chrome instance, otherwise they will hang around:
+When you are done, it's recommended to close the created Google Chrome instance, otherwise they will hang around and accumulate:
 
 ```python
 i.close()
 ```
 
-...or you can take the thermonuclear option and kill _all_ chromedrivers and Chrome instances from the command line.
+Or you can take the thermonuclear option and kill _all_ chromedrivers and Chrome instances from the command line.
 
 ```
 imgmaker kill-all-chrome

@@ -1,6 +1,6 @@
 # imgmaker
 
-![](/img/meme3.png)
+![](https://github.com/minimaxir/imgmaker/blob/master/docs/img/meme3.png?raw=true)
 
 Create high-quality images programmatically using easily-hackable templates.
 
