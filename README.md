@@ -12,7 +12,7 @@ imgmaker is a Python package that leverages headless [Google Chrome](https://www
 - Optional dynamic image height to fit whatever text is provided.
 - Leverages [jinja2](https://palletsprojects.com/p/jinja/) for Python templating, [Bulma](https://bulma.io) for high-quality CSS-only layouts, and [Font Awesome](https://fontawesome.com) for icon fonts.
 
-The generated images can be used for many things, including social sharing thumbnails, Twitter bots, and APIs.
+imgmaker contains installed templates, allowing you to create memes and watermarks out of the box. The generated images can be used for many things, including social sharing thumbnails, Twitter bots, and APIs.
 
 ## Installation
 

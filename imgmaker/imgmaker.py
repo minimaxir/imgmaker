@@ -79,6 +79,7 @@ class imgmaker:
         if height is None or height == -1:
             self.driver.set_window_size(width, 1)
             height = self.driver.find_element_by_tag_name("html").size["height"]
+
         self.driver.set_window_size(width, height)
 
         if self.scale > 1 and downsample:
