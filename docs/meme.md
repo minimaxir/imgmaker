@@ -1,10 +1,12 @@
+![](img/meme2.png)
+
 A template invoking image macros, complete with Impact font.
 
-## Template Dimensions
+## Dimensions
 
 512px x 512px
 
-## Template Parameters
+## Parameters
 
 | Name          | Description                                              | Default                                              |
 | ------------- | -------------------------------------------------------- | ---------------------------------------------------- |

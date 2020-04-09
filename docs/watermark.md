@@ -1,12 +1,14 @@
+![](img/watermark2.png)
+
 A template invoking a simple watermark on an image, inspired by Reddit's [new watermarking template](https://www.reddit.com/r/assholedesign/comments/e1d50c/reddit_watermarking_any_image_you_save_off_the_app/). But with a twist.
 
-## Template Dimensions
+## Dimensions
 
 800px x 450px
 
 You will likely need to manually determine the width/height before passing them to `generate()`
 
-## Template Parameters
+## Parameters
 
 | Name         | Description                                              | Default                                              |
 | ------------ | -------------------------------------------------------- | ---------------------------------------------------- |

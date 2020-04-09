@@ -5,12 +5,12 @@ site_author: Max Woolf (@minimaxir)
 nav:
   - Home: index.md
   - Tutorial: tutorial.md
-  - Helpful Notes: helpful-notes.md
+  - Create Your Own Template: template.md
   - Templates:
       - Hero: hero.md
       - Meme (Image Macro): meme.md
       - Watermarked Image: watermark.md
-  - Create Your Own Template: template.md
+  - Helpful Notes: helpful-notes.md
 
 theme:
   name: "material"
@@ -20,8 +20,8 @@ theme:
   font:
     text: "Source Sans Pro"
     code: "Fira Code"
-  feature:
-    tabs: true
+  icon:
+    logo: fontawesome/brands/git-alt
 
 repo_name: minimaxir/imgmaker
 repo_url: https://github.com/minimaxir/imgmaker
@@ -41,3 +41,5 @@ markdown_extensions:
       guess_lang: false
   - mkautodoc
   - admonition
+  - toc:
+      permalink: true

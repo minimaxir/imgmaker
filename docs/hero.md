@@ -1,12 +1,14 @@
+![](img/readme1.png)
+
 A very simple example of imgmaker leveraging Bulma's [hero unit styles](https://bulma.io/documentation/layout/hero/).
 
 The Hero template is the default template used if none is specified.
 
-## Template Dimensions
+## Dimensions
 
 320px x 240px
 
-## Template Parameters
+## Parameters
 
 | Name         | Description                                                         | Default           |
 | ------------ | ------------------------------------------------------------------- | ----------------- |

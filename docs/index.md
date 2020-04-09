@@ -1,5 +1,7 @@
 # imgmaker
 
+![](/img/meme3.png)
+
 Create high-quality images programmatically using easily-hackable templates.
 
 imgmaker is a Python package that leverages headless [Google Chrome](https://www.google.com/chrome/) via [selenium](https://selenium-python.readthedocs.io) for image generation, which counterintuitively has many benefits:
