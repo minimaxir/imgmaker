@@ -2,7 +2,7 @@ A template invoking a simple watermark on an image, inspired by Reddit's [new wa
 
 ## Template Dimensions
 
-512px x 512px
+800px x 450px
 
 You will likely need to manually determine the width/height before passing them to `generate()`
 

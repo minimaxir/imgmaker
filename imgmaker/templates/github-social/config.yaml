@@ -3,9 +3,9 @@ template: github-social.html
 width: 1280
 height: 640
 default_params:
-  lang_icon: 'fab fa-python'
-  lang: Python
-  tags: Cool Stuff
-  madeby: Made by me!
-  avatar: https://bulma.io/images/placeholders/128x128.png
-  background: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg
+  lang_icon: "fab fa-python"
+  lang: "Python"
+  tags: "image generation, APIs"
+  madeby: "Made by me!"
+  # avatar: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg
+  # background: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg
