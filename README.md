@@ -78,7 +78,19 @@ i.generate(
 
 ![](docs/img/readme2.png)
 
-You can view all the templates included with imgmaker in the docs. You can also provide your own Jinja templates to `generate()`.
+You can also provide your own Jinja templates to `generate()`; see this doc for a tutorial.
+
+When you are done, it's recommended to close the Google Chrome instance, otherwise they will hang around:
+
+```python
+i.close()
+```
+
+...or you can take the thermonuclear option and kill _all_ chromedrivers and Chrome instances from the command line.
+
+```
+imgmaker kill-all-chrome
+```
 
 ## Helpful Notes
 

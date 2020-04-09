@@ -13,6 +13,7 @@ import zipfile
 import fire
 from pkg_resources import resource_filename
 import yaml
+import psutil
 
 
 class imgmaker:
@@ -145,6 +146,15 @@ def render_html_template(env, template_path, template_params):
     return html_template.render(template_params)
 
 
+def kill_all_chrome():
+    # https://stackoverflow.com/a/4230226
+    for proc in psutil.process_iter():
+        name = proc.name()
+        if name == "chromedriver" or name in "Google Chrome":
+            proc.kill()
+    print("All Chrome and chromedriver processes killed.")
+
+
 def download_chromedriver():
     """
     Downloads the latest version of Chromedriver corresponding to the
@@ -211,11 +221,14 @@ def imgmaker_cli(
 
     assert action in [
         "chromedriver",
+        "kill-all-chrome",
         "generate",
     ], "action must be chromedriver or generate."
 
     if action == "chromedriver":
         download_chromedriver()
+    elif action == "kill-all-chrome":
+        kill_all_chrome()
     elif action == "generate":
         i = imgmaker(chromedriver_path, scale)
         i.generate(
