@@ -5,3 +5,4 @@ requests
 fire
 markdown
 psutil
+pyyaml
