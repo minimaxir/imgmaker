@@ -31,5 +31,6 @@ setup(
         "fire",
         "markdown",
         "psutil",
+        "pyyaml",
     ],
 )
