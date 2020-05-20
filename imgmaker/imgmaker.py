@@ -14,22 +14,30 @@ import fire
 from pkg_resources import resource_filename
 import yaml
 import psutil
+from typing import List
 
 
 class imgmaker:
-    def __init__(self, chromedriver_path: str = "./chromedriver", scale: int = 2):
+    def __init__(
+        self,
+        chromedriver_path: str = "./chromedriver",
+        scale: int = 2,
+        add_args: List[str] = [],
+    ):
         assert isinstance(scale, int), "scale must be an integer."
         self.scale = scale
         self.env = build_jinja_env()
 
         chrome_options = Options()
 
-        for arg in [
+        args = [
             "--headless",
             "--hide-scrollbars",
             "--disable-gpu",
             f"--force-device-scale-factor={scale}",
-        ]:
+        ] + add_args
+
+        for arg in args:
             chrome_options.add_argument(arg)
 
         self.driver = webdriver.Chrome(
