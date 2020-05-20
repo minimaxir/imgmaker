@@ -17,7 +17,7 @@ import psutil
 
 
 class imgmaker:
-    def __init__(self, chromedriver_path="./chromedriver", scale=2):
+    def __init__(self, chromedriver_path: str = "./chromedriver", scale: int = 2):
         assert isinstance(scale, int), "scale must be an integer."
         self.scale = scale
         self.env = build_jinja_env()
@@ -38,13 +38,13 @@ class imgmaker:
 
     def generate(
         self,
-        template_path="hero",
-        template_params={},
-        width=None,
-        height=None,
-        downsample=True,
-        output_file="img.png",
-        save_html=False,
+        template_path: str = "hero",
+        template_params: dict = {},
+        width: int = None,
+        height: int = None,
+        downsample: bool = True,
+        output_file: str = "img.png",
+        save_html: bool = False,
     ):
 
         if os.path.isfile(template_path):
@@ -98,16 +98,16 @@ class imgmaker:
 
 def build_jinja_env():
     # https://stackoverflow.com/q/15555870
-    def safe_markdown(text):
+    def safe_markdown(text: str):
         return Markup(markdown(text, extensions=["smarty"]))
 
-    def strip_markdown(text):
+    def strip_markdown(text: str):
         """
         Removes the <p> and </p> tags added by default.
         """
         return safe_markdown(text)[3:-4]
 
-    def img_encode(img_path):
+    def img_encode(img_path: str):
         """
         Checks if a provided image is a local image or a remote image.
         If local, encodes the image as a base64 string,
@@ -125,7 +125,7 @@ def build_jinja_env():
             img_str = f"data:image/{img_type};base64,{img_str}"
         else:
             # Remote image
-            logging.info("Downloading {img_path}")
+            logging.info(f"Downloading {img_path}")
             img_str = img_path
 
         return img_str
@@ -141,7 +141,7 @@ def build_jinja_env():
     return env
 
 
-def render_html_template(env, template_path, template_params):
+def render_html_template(env: Environment, template_path: str, template_params: dict):
     with open(template_path, "r", encoding="utf-8") as f:
         html_template = env.from_string(f.read())
     return html_template.render(template_params)
