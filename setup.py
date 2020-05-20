@@ -30,5 +30,6 @@ setup(
         "markdown",
         "psutil",
         "pyyaml",
+        "pngquant",
     ],
 )

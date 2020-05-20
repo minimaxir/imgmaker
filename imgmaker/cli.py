@@ -91,11 +91,20 @@ def generate(
     height: int = None,
     downsample: bool = True,
     output_file: str = "img.png",
+    use_pngquant: bool = False,
 ):
     """
     Generates an image according to the
     given parameters.
     """
     i = imgmaker(chromedriver_path, scale)
-    i.generate(template_path, template_params, width, height, downsample, output_file)
+    i.generate(
+        template_path,
+        template_params,
+        width,
+        height,
+        downsample,
+        output_file,
+        use_pngquant=use_pngquant,
+    )
     i.close()

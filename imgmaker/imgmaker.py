@@ -10,6 +10,11 @@ import logging
 from pkg_resources import resource_filename
 import yaml
 from typing import List
+import pngquant
+import shutil
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 
 class imgmaker:
@@ -48,7 +53,14 @@ class imgmaker:
         downsample: bool = True,
         output_file: str = "img.png",
         save_html: bool = False,
+        use_pngquant: bool = False,
     ):
+
+        if use_pngquant:
+            assert shutil.which("pngquant"), (
+                "use_pngquant was set to True but pngquant is "
+                + "not installed on the system."
+            )
 
         if os.path.isfile(template_path):
             # if loading a template outside the package
@@ -94,6 +106,10 @@ class imgmaker:
             img.save(output_file)
         else:
             self.driver.get_screenshot_as_file(output_file)
+
+        if use_pngquant:
+            logger.info(f"Compressing {output_file} with pngquant.")
+            pngquant.quant_image(output_file)
 
     def close(self):
         self.driver.close()
