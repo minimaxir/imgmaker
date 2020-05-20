@@ -4,16 +4,11 @@ from PIL import Image
 from jinja2 import Markup, Environment
 from markdown import markdown
 from base64 import b64encode
-from sys import platform
 import io
 import os
 import logging
-import requests
-import zipfile
-import fire
 from pkg_resources import resource_filename
 import yaml
-import psutil
 from typing import List
 
 
@@ -153,98 +148,3 @@ def render_html_template(env: Environment, template_path: str, template_params: 
     with open(template_path, "r", encoding="utf-8") as f:
         html_template = env.from_string(f.read())
     return html_template.render(template_params)
-
-
-def kill_all_chrome():
-    # https://stackoverflow.com/a/4230226
-    for proc in psutil.process_iter():
-        name = proc.name()
-        if name == "chromedriver" or name in "Google Chrome":
-            proc.kill()
-    print("All Chrome and chromedriver processes killed.")
-
-
-def download_chromedriver():
-    """
-    Downloads the latest version of Chromedriver corresponding to the
-    `stable` Chrome branch.
-    """
-
-    if os.path.isfile("chromedriver"):
-        print("chromedriver binary is already present in the current directory.")
-        return
-
-    latest_chrome = requests.get(
-        "https://chromedriver.storage.googleapis.com/LATEST_RELEASE"
-    ).text
-
-    # https://stackoverflow.com/a/8220141
-    platforms_binary = {
-        "linux": "linux64",
-        "darwin": "mac64",
-        "win32": "win32",
-    }
-
-    binary = platforms_binary[platform]
-
-    print(f"Downloading ChromeDriver {latest_chrome} for {binary}.")
-
-    chromedriver = requests.get(
-        f"https://chromedriver.storage.googleapis.com/{latest_chrome}/chromedriver_{binary}.zip",
-        stream=True,
-    )
-
-    with open("chromedriver.zip", "wb") as f:
-        for chunk in chromedriver.iter_content(chunk_size=128):
-            f.write(chunk)
-
-    # https://stackoverflow.com/a/46837272
-    with zipfile.ZipFile("chromedriver.zip", "r") as zf:
-        for info in zf.infolist():
-            extracted_path = zf.extract(info, "")
-
-            if info.create_system == 3:
-                unix_attributes = info.external_attr >> 16
-                if unix_attributes:
-                    os.chmod(extracted_path, unix_attributes)
-
-    os.remove("chromedriver.zip")
-
-
-def imgmaker_cli(
-    action="chromedriver",
-    template_path="hero",
-    template_params={},
-    chromedriver_path="./chromedriver",
-    scale=2,
-    width=None,
-    height=None,
-    downsample=True,
-    output_file="img.png",
-):
-    """Create high-quality images programmatically using easily-hackable templates.
-
-    action: Action to perform. Select `chromedriver` to download Chromedriver,
-    `generate` to generate an image.
-    """
-
-    assert action in [
-        "chromedriver",
-        "kill-all-chrome",
-        "generate",
-    ], "action must be chromedriver or generate."
-
-    if action == "chromedriver":
-        download_chromedriver()
-    elif action == "kill-all-chrome":
-        kill_all_chrome()
-    elif action == "generate":
-        i = imgmaker(chromedriver_path, scale)
-        i.generate(
-            template_path, template_params, width, height, downsample, output_file
-        )
-        i.close()
-
-
-def imgmaker_cli_handler(**kwargs):
-    fire.Fire(imgmaker_cli)

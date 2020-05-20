@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 long_description = """
 Create high-quality images programmatically using easily-hackable templates.
@@ -8,7 +8,7 @@ Create high-quality images programmatically using easily-hackable templates.
 setup(
     name="imgmaker",
     packages=["imgmaker"],  # this must be the same as the name above
-    version="0.1",
+    version="0.2",
     description="Create high-quality images programmatically using easily-hackable templates.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -18,9 +18,7 @@ setup(
     keywords=["images", "image generation", "cool stuff"],
     classifiers=[],
     license="MIT",
-    entry_points={
-        "console_scripts": ["imgmaker=imgmaker.imgmaker:imgmaker_cli_handler"]
-    },
+    entry_points={"console_scripts": ["imgmaker=imgmaker.cli:imgmaker_cli"]},
     python_requires=">=3.6",
     include_package_data=True,
     install_requires=[
@@ -28,7 +26,7 @@ setup(
         "jinja2",
         "Pillow",
         "requests",
-        "fire",
+        "fire>=0.3.0",
         "markdown",
         "psutil",
         "pyyaml",
