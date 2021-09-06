@@ -12,6 +12,7 @@ import yaml
 from typing import List
 import pngquant
 import shutil
+from urllib.parse import quote
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -89,7 +90,7 @@ class imgmaker:
             with open("rendered_html.html", "w", encoding="utf-8") as f:
                 f.write(html)
 
-        self.driver.get(f"data:text/html;charset=utf-8,{html}")
+        self.driver.get(f"data:text/html;charset=utf-8,{quote(html)}")
 
         if height is None or height == -1:
             self.driver.set_window_size(width, 1)
