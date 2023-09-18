@@ -100,7 +100,7 @@ class imgmaker:
             img = Image.open(io.BytesIO(self.driver.get_screenshot_as_png()))
             img = img.resize(
                 (int(img.size[0] / self.scale), int(img.size[1] / self.scale)),
-                Image.ANTIALIAS,
+                Image.LANCZOS,
             )
             img.save(output_file)
         else:
