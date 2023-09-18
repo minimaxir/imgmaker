@@ -22,12 +22,6 @@ imgmaker can be installed from PyPI via pip. (Python 3.6+)
 pip3 install imgmaker
 ```
 
-You will also need to download a [ChromeDriver](https://chromedriver.chromium.org) with the _same_ version as your installed Google Chrome. imgmaker has a CLI tool that will automatically download the ChromeDriver for your platform corresponding to the latest `stable` version to the current directory:
-
-```sh
-imgmaker chromedriver
-```
-
 ## Usage
 
 First, you can instantiate an `imgmaker` object, which starts up a headless Google Chrome in the background.
