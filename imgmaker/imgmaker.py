@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from PIL import Image
 from jinja2 import Markup, Environment
 from markdown import markdown
@@ -20,7 +21,7 @@ logger.setLevel(logging.INFO)
 class imgmaker:
     def __init__(
         self,
-        chromedriver_path: str = "./chromedriver",
+        chromedriver_path: str = None,
         scale: int = 2,
         add_args: List[str] = [],
     ):
@@ -29,7 +30,7 @@ class imgmaker:
         self.env = build_jinja_env()
 
         chrome_options = Options()
-
+        service = Service(executable_path=chromedriver_path)
         args = [
             "--headless",
             "--hide-scrollbars",
@@ -40,9 +41,7 @@ class imgmaker:
         for arg in args:
             chrome_options.add_argument(arg)
 
-        self.driver = webdriver.Chrome(
-            executable_path=chromedriver_path, options=chrome_options
-        )
+        self.driver = webdriver.Chrome(service=service, options=chrome_options)
 
     def generate(
         self,
@@ -101,7 +100,7 @@ class imgmaker:
             img = Image.open(io.BytesIO(self.driver.get_screenshot_as_png()))
             img = img.resize(
                 (int(img.size[0] / self.scale), int(img.size[1] / self.scale)),
-                Image.ANTIALIAS,
+                Image.LANCZOS,
             )
             img.save(output_file)
         else:
