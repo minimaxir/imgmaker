@@ -8,7 +8,7 @@ Create high-quality images programmatically using easily-hackable templates.
 setup(
     name="imgmaker",
     packages=["imgmaker"],  # this must be the same as the name above
-    version="0.2",
+    version="0.3",
     description="Create high-quality images programmatically using easily-hackable templates.",
     long_description=long_description,
     long_description_content_type="text/markdown",
