@@ -1,8 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 from PIL import Image
-from jinja2 import Markup, Environment
+from jinja2 import Environment
+from markupsafe import Markup
 from markdown import markdown
 from base64 import b64encode
 import io
@@ -92,9 +94,14 @@ class imgmaker:
 
         if height is None or height == -1:
             self.driver.set_window_size(width, 1)
-            height = self.driver.find_element_by_tag_name("html").size["height"]
+            height = self.driver.find_element(By.XPATH, "html").size["height"]
 
         self.driver.set_window_size(width, height)
+
+        # Enforce height as viewport height
+        viewport_height = self.driver.execute_script("return window.innerHeight")
+        if viewport_height < height:
+            self.driver.set_window_size(width, height + (height - viewport_height))
 
         if self.scale > 1 and downsample:
             img = Image.open(io.BytesIO(self.driver.get_screenshot_as_png()))

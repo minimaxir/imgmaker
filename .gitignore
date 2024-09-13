@@ -7,3 +7,6 @@ img.png
 demo.html
 rendered_html.html
 site/
+venv
+outputs/
+.DS_Store
