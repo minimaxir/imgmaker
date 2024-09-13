@@ -2,7 +2,7 @@ selenium==4.24.0
 Jinja2==3.1.4
 pillow
 requests
-fire
+fire>=0.3.0
 Markdown
 markupsafe
 pngquant

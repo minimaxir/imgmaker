@@ -22,8 +22,8 @@ setup(
     python_requires=">=3.6",
     include_package_data=True,
     install_requires=[
-        "selenium",
-        "jinja2",
+        "selenium==4.24.0",
+        "Jinja2==3.1.4",
         "Pillow",
         "requests",
         "fire>=0.3.0",
@@ -31,5 +31,6 @@ setup(
         "psutil",
         "pyyaml",
         "pngquant",
+        "markupsafe"
     ],
 )
