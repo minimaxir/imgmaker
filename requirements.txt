@@ -1,9 +1,10 @@
 selenium==4.24.0
 Jinja2==3.1.4
-pillow==10.4.0
-requests==2.32.3
-fire==0.6.0
-Markdown==3.7
-pngquant==1.0.8
-psutil==6.0.0
-PyYAML==6.0.2
+pillow
+requests
+fire
+Markdown
+markupsafe
+pngquant
+psutil
+PyYAML
