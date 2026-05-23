@@ -10,7 +10,6 @@ from base64 import b64encode
 import io
 import os
 import logging
-from pkg_resources import resource_filename
 import yaml
 from typing import List
 import pngquant
@@ -69,7 +68,7 @@ class imgmaker:
             width = width or 512
         else:
             # if using an included template
-            template_folder = resource_filename(__name__, "templates")
+            template_folder = os.path.join(os.path.dirname(__file__), "templates")
             template_subfolder = os.path.join(template_folder, template_path)
             assert os.path.isdir(
                 template_subfolder
